@@ -2,7 +2,7 @@ CREATE DATABASE blog;
 
 CREATE TABLE
     users (
-        id_user SERIAL PRIMARY KEY,
+        ID_USER SERIAL PRIMARY KEY,
         first_name VARCHAR(255) NOT NULL,
         last_name VARCHAR(255) NOT NULL,
         email VARCHAR(255) NOT NULL,
@@ -14,7 +14,7 @@ CREATE TABLE
 
 CREATE TABLE
     blogs (
-        id_blog SERIAL PRIMARY KEY,
+        ID_BLOG SERIAL PRIMARY KEY,
         id_user INT NOT NULL,
         id_category INT NOT NULL,
         title VARCHAR(255) NOT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE
 
 CREATE TABLE
     comments (
-        id_comment SERIAL PRIMARY KEY,
+        ID_COMMENT SERIAL PRIMARY KEY,
         id_blog INT NOT NULL,
         id_user INT NOT NULL,
         text_content_comment TEXT NOT NULL,
@@ -34,6 +34,6 @@ CREATE TABLE
 
 CREATE TABLE
     categories (
-        id_category SERIAL PRIMARY KEY,
+        ID_CATEGORY SERIAL PRIMARY KEY,
         name_category VARCHAR(255) NOT NULL
     );
