@@ -1,5 +1,7 @@
 CREATE DATABASE blog;
 
+DROP TABLE IF EXISTS users;
+
 CREATE TABLE
     users (
         ID_USER SERIAL PRIMARY KEY,
@@ -12,6 +14,8 @@ CREATE TABLE
         date_create TIMESTAMP
     );
 
+DROP TABLE IF EXISTS blogs;
+
 CREATE TABLE
     blogs (
         ID_BLOG SERIAL PRIMARY KEY,
@@ -23,6 +27,8 @@ CREATE TABLE
         date_create TIMESTAMP
     );
 
+DROP TABLE IF EXISTS comments;
+
 CREATE TABLE
     comments (
         ID_COMMENT SERIAL PRIMARY KEY,
@@ -31,6 +37,8 @@ CREATE TABLE
         text_content_comment TEXT NOT NULL,
         date_create TIMESTAMP
     );
+
+DROP TABLE IF EXISTS categories;
 
 CREATE TABLE
     categories (
