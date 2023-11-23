@@ -5,13 +5,14 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const app: Application = express();
-const port = process.env.PORT || 8000;
+const port = 8000
+;
 
 // Configuration of the Pug rendering engine
 app.set('view engine', 'pug');
-
+app.set('views', './src/views')
 app.get('/inscription', (req: Request, res: Response) => {
-  res.send('/inscription');
+  res.render('index', {});
 });
 
 app.listen(port, () => {
