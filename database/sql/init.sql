@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS users (
         is_admin BOOLEAN NOT NULL,
         date_create TIMESTAMP NOT NULL,
         UNIQUE (ID_USER),
-        PRIMARY KEY ("ID_USER")
+        PRIMARY KEY (ID_USER)
     );
 
 
