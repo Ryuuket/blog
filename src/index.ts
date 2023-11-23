@@ -5,10 +5,14 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const app: Application = express();
-const port = process.env.PORT || 8000;
+const port = 8000
+;
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Welcome to Express & TypeScript Server');
+// Configuration of the Pug rendering engine
+app.set('view engine', 'pug');
+app.set('views', './src/views')
+app.get('/inscription', (req: Request, res: Response) => {
+  res.render('index', {});
 });
 
 app.listen(port, () => {

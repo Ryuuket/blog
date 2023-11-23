@@ -1,0 +1,25 @@
+extends ./layout.pug
+
+
+block content 
+    h1 Inscription
+    form(action='/inscription')
+      label(for='firstname') First name :
+      input(type='text', id='firstname', name='firstname', required)
+
+      label(for='lastname') Last name:
+      input(type='lastname', id='lastname', name='lastname', required)
+
+      label(for='pseudo') Pseudo:
+      input(type='pseudo', id='pseudo', name='pseudo', required)
+
+      label(for='email') Email :
+      input(type='email', id='email', name='email', required)
+
+      label(for='password') Password:
+      input(type='password', id='password', name='password', required)
+
+
+      button(type='submit') Submit
+
+      p Already registered ?
