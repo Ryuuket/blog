@@ -1,6 +1,4 @@
 extends layout.pug
-head
-    title Login
 
 block content 
     h1 Login
