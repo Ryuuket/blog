@@ -10,7 +10,6 @@ const port = 8000
 
 // Configuration of the Pug rendering engine
 app.set('view engine', 'pug');
-
 app.set('views', './src/views')
 app.get('/inscription', (req: Request, res: Response) => {
   res.render('index', {});
