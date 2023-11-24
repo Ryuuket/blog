@@ -1,5 +1,5 @@
 // controllerUser.ts
-import {firstname, lastname, pseudo, email, password, confirmation} from "..routes/register";
+import {firstname, lastname, pseudo, email, password, confirmation} from "../routes/register";
 
 export class ControllerUser {
     private static nameRegex = /^[A-Za-z\-]+$/;
