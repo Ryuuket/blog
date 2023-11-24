@@ -3,6 +3,8 @@ import dotenv from 'dotenv';
 import client from './database';
 import * as crypto from "crypto";
 
+
+
 //For env File 
 dotenv.config();
 
@@ -30,7 +32,7 @@ app.get('/submit-register', async (req, res) => {
   const lastname = req.query.lastname as string;
   const firstname = req.query.firstname as string;
   const confirmation = req.query.confirmation as string;
-
+  
 //avec des ou ou des else if retourner si les chaines de charactères sont pas vide(no) pour login et password
  // Validation des données avec des regex
  const nameRegex = /^[A-Za-z\-]+$/;
@@ -71,7 +73,7 @@ if (Object.keys(errors).length > 0) {
   // Hash the salt and password with 10000 iterations, 64 length and sha512 digest 
   const hash = crypto.pbkdf2Sync(password, salt, 10000, 64, 'sha512').toString('hex');
 
-
+ 
   try {
     const query = 'INSERT INTO formulaire (last_name, first_name, email, pseudo, key_password, is_admin,) VALUES ($1, $2,$3, $4,$5,$6)';
     const values = [firstname, lastname,email, pseudo, hash];
@@ -84,8 +86,9 @@ if (Object.keys(errors).length > 0) {
     res.status(500).send('Erreur lors de la sauvegarde des données.');
   }
   
-
-});
+ 
+})
+;
 app.listen(port, () => {
   console.log(`Server is Fire at http://localhost:${port}/home`);
 });
@@ -97,3 +100,5 @@ app.get('/submit-login', async (req, res) => {
 
 
 });
+
+
