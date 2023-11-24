@@ -3,7 +3,7 @@ extends ./layout.pug
 block content 
     
     h1= pageTitle
-    form(action='/inscription')
+    form(action='/submit-register')
       label(for='firstname') First name :
       input(type='text', id='firstname', name='firstname', required)
 
@@ -18,6 +18,9 @@ block content
 
       label(for='password') Password:
       input(type='password', id='password', name='password', required)
+
+      label(for='confirmation') Confirmation password:
+      input(type='password', id='confirmation', name='confirmation', required)
 
 
       button(type='submit') Submit
