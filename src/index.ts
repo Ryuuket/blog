@@ -22,6 +22,7 @@ app.get('/home', (req: Request, res: Response) => {
 app.get('/login', (req: Request, res: Response) => {
   res.render('login', {pageTitle: 'Connexion'});
 });
+
 app.get('/submit-register', async (req, res) => {
   // Récupération des données du formulaire à partir de la requête
   const password = req.query.password as string;
@@ -30,6 +31,7 @@ app.get('/submit-register', async (req, res) => {
   const lastname = req.query.lastname as string;
   const firstname = req.query.firstname as string;
   const confirmation = req.query.confirmation as string;
+
 
 //avec des ou ou des else if retourner si les chaines de charactères sont pas vide(no) pour login et password
  // Validation des données avec des regex
@@ -73,8 +75,8 @@ if (Object.keys(errors).length > 0) {
 
 
   try {
-    const query = 'INSERT INTO formulaire (last_name, first_name, email, pseudo, key_password, is_admin,) VALUES ($1, $2,$3, $4,$5,$6)';
-    const values = [firstname, lastname,email, pseudo, hash];
+    const query = 'SELECT formulaire (last_name, first_name, email, pseudo, key_password, is_admin,) VALUES ($1, $2,$3, $4,$5,$6)';
+    const values = [firstname, lastname,email, pseudo, hash, test];
 
     await client.query(query, values);
     res.send('Données sauvegardées dans la base de données PostgreSQL.');
