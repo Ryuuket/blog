@@ -1,6 +1,8 @@
 import express, { Express, Request, Response, Application } from "express";
 import { app } from "../index";
 import { insertData } from "../models/register";
+import { ControllerUser } from "../controllers/ControllerUsers";
+import { UserHash } from "../controllers/UserHash";
 
 app.get("/inscription", (req: Request, res: Response) => {
   res.render("register", { pageTitle: "Inscription" });
@@ -16,6 +18,7 @@ export let keypassword: string;
 export let isAdmin: boolean;
 export let currentDate: Date;
 export let isValid: boolean;
+export let errors_message: { [key: string]: string };
 
 app.get("/submit-register", async (req: Request, res: Response) => {
   // Récupération des données du formulaire à partir de la requête
@@ -27,13 +30,17 @@ app.get("/submit-register", async (req: Request, res: Response) => {
   confirmation = req.query.confirmation as string;
   isAdmin = false;
   currentDate = new Date();
-  isValid = false;
+  errors_message = {};
 
   // AJOUT DES CLASSES DE CONTROLE
   // ...
-  // traitement de la réponse isValid
+  ControllerUser.validateUserInputs();
 
-  if (isValid) {
+  if (errors_message.validation === "true") {
+    // traitement de la réponse isValid
+
+    keypassword = UserHash.hashPassword(password);
+
     try {
       await insertData(currentDate);
       res.render("register", {
@@ -49,8 +56,14 @@ app.get("/submit-register", async (req: Request, res: Response) => {
     }
   } else {
     res.status(500).render("register", {
-      pageTitle: "Inscription - Erreur",
-      messageNosuccess: "Erreur lors de l'inscription :",
+      pageTitle: "Inscription",
+      messageNosuccess: "Erreur lors de l'inscription !!",
+      messageErrorFirstname: errors_message.firstname,
+      messageErrorLastname: errors_message.lastname,
+      messageErrorEmail: errors_message.email,
+      messageErrorPseudo: errors_message.pseudo,
+      messageErrorPassword: errors_message.password,
+      messageErrorConfirmation: errors_message.confirmation,
     });
   }
 });

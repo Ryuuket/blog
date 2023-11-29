@@ -1,38 +1,48 @@
 extends ./layout.pug
 
 block content
-  // Afficher le formulaire sinon
   h1= pageTitle
   if messageSuccess
     // Afficher le message si présent
     p= messageSuccess
     a(href='/') Revenir à Home <br>
     a(href='/login') Se connecter
+    // Afficher le formulaire sinon
   else
-
+    if messageNosuccess
+      p= messageNosuccess
     form(action='/submit-register')
       label(for='firstname') First name :
       input(type='text', id='firstname', name='firstname', required)
+      if messageErrorFirstname
+       span= messageErrorFirstname
 
       label(for='lastname') Last name:
       input(type='text', id='lastname', name='lastname', required)
+      if messageErrorLastname
+       span= messageErrorLastname
 
       label(for='pseudo') Pseudo:
       input(type='text', id='pseudo', name='pseudo', required)
+      if messageErrorPseudo
+       span= messageErrorPseudo
 
       label(for='email') Email :
       input(type='email', id='email', name='email', required)
+      if messageErrorEmail
+       span= messageErrorEmail
 
       label(for='password') Password:
       input(type='password', id='password', name='password', required)
+      if messageErrorPassword
+       span= messageErrorPassword
 
       label(for='confirmation') Confirmation password:
       input(type='password', id='confirmation', name='confirmation', required)
+      if messageErrorConfirmation
+       span= messageErrorConfirmation
 
       button(type='submit') Submit
 
       p Already registered ?
   
-  if messageNosuccess
-    // Afficher le message si présent
-    p= messageNosuccess
