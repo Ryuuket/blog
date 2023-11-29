@@ -1,5 +1,6 @@
 import express, { Express, Request, Response, Application } from "express";
 import { app } from "../index";
+import { insertData } from "../models/register";
 
 app.get("/inscription", (req: Request, res: Response) => {
   res.render("register", { pageTitle: "Inscription" });
@@ -13,6 +14,8 @@ export let firstname: string;
 export let confirmation: string;
 export let keypassword: string;
 export let isAdmin: boolean;
+export let currentDate: Date;
+export let isValid: boolean;
 
 app.get("/submit-register", async (req: Request, res: Response) => {
   // Récupération des données du formulaire à partir de la requête
@@ -23,6 +26,31 @@ app.get("/submit-register", async (req: Request, res: Response) => {
   password = req.query.password as string;
   confirmation = req.query.confirmation as string;
   isAdmin = false;
-  const currentDate: Date = new Date();
-  const isValid: boolean = false;
+  currentDate = new Date();
+  isValid = false;
 
+  // AJOUT DES CLASSES DE CONTROLE
+  // ...
+  // traitement de la réponse isValid
+
+  if (isValid) {
+    try {
+      await insertData(currentDate);
+      res.render("register", {
+        pageTitle: "Inscription Réussie",
+        messageSuccess: "Inscription réussie !",
+      });
+    } catch (error) {
+      console.error("Error during registration:", error);
+      res.status(500).render("register", {
+        pageTitle: "Inscription",
+        messageNosuccess: "Erreur lors de l'inscription",
+      });
+    }
+  } else {
+    res.status(500).render("register", {
+      pageTitle: "Inscription - Erreur",
+      messageNosuccess: "Erreur lors de l'inscription :",
+    });
+  }
+});
