@@ -27,7 +27,7 @@ app.get("/submit-register", async (req: Request, res: Response) => {
   confirmation = req.query.confirmation as string;
   isAdmin = false;
   currentDate = new Date();
-
+  isValid = false;
 
   // AJOUT DES CLASSES DE CONTROLE
   // ...
