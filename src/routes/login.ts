@@ -6,7 +6,7 @@ app.get("/login", (req: Request, res: Response) => {
 });
 
 export let login: string;
-export let password: string;
+export 
 
 app.get("/submit-login", async (req: Request, res: Response) => {
   // Récupération des données du formulaire à partir de la requête

@@ -25,4 +25,4 @@ app.get("/submit-register", async (req: Request, res: Response) => {
   isAdmin = false;
   const currentDate: Date = new Date();
   const isValid: boolean = false;
-});
+
