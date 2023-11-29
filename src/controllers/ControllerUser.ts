@@ -7,36 +7,8 @@ export class ControllerUser {
     private static passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
     private static pseudoRegex = /^[a-zA-Z0-9_]{3,20}$/;
 
-    // private static firstname:string;
-    // private static lastname:string;
-    // private static pseudo:string;
-    // private static email:string;
-    // private static password:string;
-    // private static confirmation:string;
-
-    // public setFirstname(firstname : string) : void{
-    //     ControllerUser.firstname = firstname;
-    // }
-
-    // public get lastname() {
-    //     return ControllerUser.lastname;
-    // }
-
-    // public get pseudo() {
-    //     return ControllerUser.pseudo;
-    // }
-
-    // public get email() {
-    //     return ControllerUser.email;
-    // }
-
-    // public get password() {
-    //     return ControllerUser.password;
-    // }
-
-    // public get confirmation() {
-    //     return ControllerUser.confirmation;
-    // }
+   
+  
   
     public static validateUserInputs(): { [key: string]: string }  {
     
