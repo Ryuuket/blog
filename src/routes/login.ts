@@ -1,8 +1,8 @@
-import express, { Express, Request, Response, Application } from 'express';
-import { app } from '../index';
+import express, { Express, Request, Response, Application } from "express";
+import { app } from "../index";
 
-app.get('/login', (req: Request, res: Response) => {
-    res.render('login', { pageTitle: 'Connexion' });
+app.get("/login", (req: Request, res: Response) => {
+  res.render("login", { pageTitle: "Connexion" });
 });
 
 let login: string = "";;
