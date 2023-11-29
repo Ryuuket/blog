@@ -1,4 +1,5 @@
 import express, { Express, Request, Response , Application } from 'express';
+import {postLogin} from './controllers/login'
 import dotenv from 'dotenv';
 import client from './database';
 import * as crypto from "crypto";
@@ -16,6 +17,7 @@ app.set('views', './src/views')
 app.get('/inscription', (req: Request, res: Response) => {
   res.render('index', {pageTitle: 'Inscription'});
 });
+
 app.get('/home', (req: Request, res: Response) => {
   res.render('home', {pageTitle: 'Home'});
 });
@@ -31,7 +33,6 @@ app.get('/submit-register', async (req, res) => {
   const firstname = req.query.firstname as string;
   const confirmation = req.query.confirmation as string;
 
-//avec des ou ou des else if retourner si les chaines de charactères sont pas vide(no) pour login et password
  // Validation des données avec des regex
  const nameRegex = /^[A-Za-z\-]+$/;
  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]{2,}\.[a-zA-Z]{2,3}$/;
@@ -89,6 +90,8 @@ if (Object.keys(errors).length > 0) {
 app.listen(port, () => {
   console.log(`Server is Fire at http://localhost:${port}/home`);
 });
+
+app.post('/login', postLogin)
 
 app.get('/submit-login', async (req, res) => {
   // Récupération des données du formulaire à partir de la requête
