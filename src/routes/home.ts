@@ -4,3 +4,5 @@ import { app } from '../index';
 app.get('/', (req: Request, res: Response) => {
     res.render('home', { pageTitle: 'Home' });
 });
+
+app.use(express.static('styles'));
