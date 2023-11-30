@@ -9,8 +9,11 @@ html
 
             nav
             a(href='/') Home - 
-            a(href='/login') Connexion - 
-            a(href='/inscription') Inscription - 
+            if isUserLoggedIn
+                a(href='/login') Connexion - 
+                a(href='/inscription') Inscription
+            else 
+                a(href='/logout') Déconnexion
         block content
         if isUserLoggedIn  
             // Utilisez la variable définie dans la session
