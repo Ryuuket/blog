@@ -10,9 +10,9 @@ app.get("/login", (req: Request, res: Response) => {
 
 export let login: string;
 export let password: string;
+export let keyPassword: string;
 export let loginIsValid: boolean;
 export let loginIsAdmin: boolean;
-
 
 app.get("/submit-login", async (req: Request, res: Response) => {
   // Récupération des données du formulaire à partir de la requête
@@ -29,39 +29,58 @@ app.get("/submit-login", async (req: Request, res: Response) => {
 
     userRequestLogin.logRequest();
 
-    loginIsValid = userRequestLogin.getIsLoginExist() || false;
+    userRequestLogin
+      .getIsLoginExist()
+      .then((loginIsValid) => {
+        const result = loginIsValid || false;
+        console.log("1 : " + result);
 
-    if (loginIsValid) {
-      // Classe controle Variable
-      const passwordExist: boolean = UserHash.verifyPassword(
-        password,
-        userRequestLogin.getKeyPassword()
-      );
-      // Si controle ok :
-      // Classe controle login et password
-      if (passwordExist) {
-        req.session.loginIsValid = true;
-        const isUserLoggedIn = req.session.loginIsValid || false;
+        if (loginIsValid) {
+          // Classe controle Variable
 
-        res.render("home", {
-          pageTitle: "Home",
-          isUserLoggedIn: isUserLoggedIn,
-        });
-        if (loginIsAdmin) {
-          req.session.loginIsAdmin = true;
+          userRequestLogin
+            .getKeyPassword()
+            .then((keyPassword) => {
+              // Utiliser keyPassword ici
+              console.log(keyPassword);
+
+              const passwordExist: boolean = UserHash.verifyPassword(
+                password,
+                keyPassword
+              );
+              // Si controle ok :
+              // Classe controle login et password
+              if (passwordExist) {
+                req.session.loginIsValid = true;
+                const isUserLoggedIn = req.session.loginIsValid || false;
+
+                res.render("home", {
+                  pageTitle: "Home",
+                  isUserLoggedIn: isUserLoggedIn,
+                });
+                if (loginIsAdmin) {
+                  req.session.loginIsAdmin = true;
+                }
+              } else {
+                res.render("login", {
+                  pageTitle: "Connexion",
+                  messagevoid: "mot de passe n'existe pas",
+                });
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        } else {
+          res.render("login", {
+            pageTitle: "Connexion",
+            messagevoid: "le login n'existe pas",
+          });
         }
-      } else {
-        res.render("login", {
-          pageTitle: "Connexion",
-          messagevoid: "mot de passe n'existe pas",
-        });
-      }
-    } else {
-      res.render("login", {
-        pageTitle: "Connexion",
-        messagevoid: "le login n'existe pas",
+      })
+      .catch((error) => {
+        console.error(error);
       });
-    }
   } else {
     res.render("login", {
       pageTitle: "Connexion",

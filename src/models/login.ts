@@ -36,16 +36,18 @@ export class UserRequestLogin{
     }
   }
 
-  public getIsLoginExist(): boolean {
-    console.log(this.isLoginExist);
+  public async getIsLoginExist(): Promise<boolean>  {
+    await this.logRequest();
     return this.isLoginExist;
   }
 
-  public getKeyPassword(): string { 
-        return this.keyPassword;
+  public async getKeyPassword(): Promise<string> { 
+    await this.logRequest();
+    return this.keyPassword;
   }
 
-  public getIsIsAdmin(): boolean {
+  public async getIsIsAdmin(): Promise<boolean>  {
+    await this.logRequest();
     return this.loginIsAdmin;
   }
 
