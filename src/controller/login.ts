@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import { ERROR_LOGIN, SUCCESS_LOGIN } from '../utils/constants';
+import { nameRegex, passwordRegex } from "../controllers/ControllerUsers";
 import { checkcredentials } from '../services/regex';
 try { 
 	const { username, password } = req.body;
