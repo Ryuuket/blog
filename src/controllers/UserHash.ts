@@ -12,4 +12,14 @@ export class UserHash {
 
     return hash;
   }
+
+  // Hash the salt and password with 10000 iterations, 64 length and sha512 digest
+ static verifyPassword(inputPassword: string, storedHash: string): boolean {
+    const hash = crypto
+      .pbkdf2Sync(inputPassword, UserHash.salt, 10000, 64, "sha512")
+      .toString("hex");
+
+    return hash === storedHash;
+  }
+
 }

@@ -1,39 +1,52 @@
-import {
-    login,
-    password
-} from "../routes/login";
 import client from "../database";
 
-export async function reqlog (): Promise<void> {
+export class UserRequestLogin{
+  private login: string;
+  private keyPassword: string;
+  private loginIsAdmin: boolean;
+  private isLoginExist: boolean;
+
+  constructor(login: string) {
+    this.login = login;
+    this.keyPassword = "";
+    this.loginIsAdmin = false;
+    this.isLoginExist = false;
+  }
+
+  async logRequest(): Promise<void> {
     try {
-        const query =
-            "SELECT ID_USER FROM users WHERE email = $1 or pseudo = $1"
-        const values = [
-            login,
-        ];
+      const query = "SELECT * FROM users WHERE email = $1 or pseudo = $1";
+      const values = [this.login];
 
-        await client.query(query, values, (error: string , results: string) => {
-            if (error) throw error;
-            console.log(results);
-            if (results.length > 0) {
-                console.log('User with this email or pseudo already exists.');
-            } else {
-                console.log('User with this email and pseudo does not exist.');
-            }
+      const result = await client.query(query, values);
 
-            client.end();
-        });
+      if (result.rows.length > 0) {
+        this.keyPassword = result.rows[0].key_password;
+        this.loginIsAdmin = result.rows[0].is_admin;
+        this.isLoginExist = true;
+    console.log(this.isLoginExist);
+        
+      } 
 
-
-
-
-
-
-        //await client.query(query, values);
-
-        console.log("Data inserted successfully");
     } catch (error) {
-        console.error("Error inserting data:", error);
-        throw error; // Propager l'erreur pour la gérer dans la route
+      console.error("Error inserting data:", error);
+      throw error; // Propagate the error to handle it in the route
+    } finally {
+      // client.end();
     }
+  }
+
+  public getIsLoginExist(): boolean {
+    console.log(this.isLoginExist);
+    return this.isLoginExist;
+  }
+
+  public getKeyPassword(): string { 
+        return this.keyPassword;
+  }
+
+  public getIsIsAdmin(): boolean {
+    return this.loginIsAdmin;
+  }
+
 }
