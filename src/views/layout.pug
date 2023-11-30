@@ -3,20 +3,27 @@ html
     head
         title= pageTitle
         meta(charset='UTF-8')
+        block styles
+            link(rel='stylesheet', type='text/css', href='./layout.css')  
     body
-        header
-            img(src='https://th.bing.com/th/id/OIP.Nz5UDK6LMSOs3voxTU4bQgAAAA?w=190&h=163&rs=1&pid=ImgDetMain', alt='logo')
+        header(class='header')
+            img(src='https://wpformation.com/wp-content/uploads/2013/06/Blog.png', alt='logo' class="logo_header")
 
-            nav
-            a(href='/') Home - 
-            a(href='/login') Connexion - 
-            a(href='/inscription') Inscription - 
+            nav(class='nav_bar')
+            a(href='/' class="link")  Home 
+            a(href='/login' class="link") Connexion 
+            a(href='/inscription' class="link") Inscription
+            a(href='/submit')
+                img(src='https://i.kisscc0.com/20180817/bww/kisscc0-addition-plus-and-minus-signs-symbol-computer-ic-mono-vcs-add-5b7721dab47842.3761992315345341067392.png', alt='icone' class="icone")
         block content
-        footer
-            p Suivez Moi
+        footer(class='footer')
+            section(class="column_footer")
+                p(class="p_footer") Suivez Moi
+                img(src='https://www.griffith.edu.au/__data/assets/image/0026/259730/FB.png', alt='logo' class="icone")
 
-            img(src='https://th.bing.com/th/id/OIP.Nz5UDK6LMSOs3voxTU4bQgAAAA?w=190&h=163&rs=1&pid=ImgDetMain', alt='logo')
+            img(src='https://wpformation.com/wp-content/uploads/2013/06/Blog.png', alt='logo' class="logo_footer")
 
-            p Contactez-moi
-            p blabla@gmail.com
-            p 07-07-07-07-07
+            section(class="column_footer")
+                p(class="p_footer") Contactez-moi
+                p blabla@gmail.com
+                p 07-07-07-07-07
