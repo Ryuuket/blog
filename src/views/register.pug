@@ -1,6 +1,7 @@
 extends ./layout.pug
 
 block content
+
   section(class="section_form")
     // Afficher le formulaire sinon
     h1= pageTitle
@@ -14,25 +15,40 @@ block content
       form(action='/submit-register' class="formulaire")
         label(for='firstname' class='label') First name :
         input(type='text', id='firstname', name='firstname', required class="input")
+        if messageErrorFirstname
+          span= messageErrorFirstname
 
         label(for='lastname' class='label') Last name:
         input(type='text', id='lastname', name='lastname', required class="input")
+        if messageErrorLastname
+          span= messageErrorLastname
 
         label(for='pseudo' class='label') Pseudo:
         input(type='text', id='pseudo', name='pseudo', required class="input")
+        if messageErrorPseudo
+          span= messageErrorPseudo
 
         label(for='email' class='label') Email :
         input(type='email', id='email', name='email', required class="input")
+        if messageErrorEmail
+          span= messageErrorEmail
 
         label(for='password' class='label') Password:
         input(type='password', id='password', name='password', required class="input")
+        if messageErrorPassword
+          span= messageErrorPassword
 
         label(for='confirmation' class='label') Confirmation password:
         input(type='password', id='confirmation', name='confirmation', required class="input")
+        if messageErrorConfirmation
+          span= messageErrorConfirmation
+
 
         button(type='submit' class='button') Submit
+
 
           
     if messageNosuccess
       // Afficher le message si présent
       p= messageNosuccess
+

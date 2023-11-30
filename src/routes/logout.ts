@@ -3,7 +3,10 @@ import { app } from '../index';
 
 
 
-app.get('/', (req: Request, res: Response) => {
+app.get('/logout', (req: Request, res: Response) => {
+
+    req.session.loginIsValid = false;
+    req.session.loginIsAdmin = false;
 
     const isUserLoggedIn = req.session.loginIsValid || false;
 
