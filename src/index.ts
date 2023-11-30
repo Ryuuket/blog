@@ -32,4 +32,5 @@ app.listen(port, () => {
 
 import "./routes/home";
 import "./routes/login";
+import "./routes/logout";
 import "./routes/register";
