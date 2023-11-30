@@ -1,48 +1,54 @@
 extends ./layout.pug
 
 block content
-  h1= pageTitle
-  if messageSuccess
-    // Afficher le message si présent
-    p= messageSuccess
-    a(href='/') Revenir à Home <br>
-    a(href='/login') Se connecter
+
+  section(class="section_form")
     // Afficher le formulaire sinon
-  else
+    h1= pageTitle
+    if messageSuccess
+      // Afficher le message si présent
+      p= messageSuccess
+      a(href='/') Revenir à Home <br>
+      a(href='/login') Se connecter
+    else
+
+      form(action='/submit-register' class="formulaire")
+        label(for='firstname' class='label') First name :
+        input(type='text', id='firstname', name='firstname', required class="input")
+        if messageErrorFirstname
+          span= messageErrorFirstname
+
+        label(for='lastname' class='label') Last name:
+        input(type='text', id='lastname', name='lastname', required class="input")
+        if messageErrorLastname
+          span= messageErrorLastname
+
+        label(for='pseudo' class='label') Pseudo:
+        input(type='text', id='pseudo', name='pseudo', required class="input")
+        if messageErrorPseudo
+          span= messageErrorPseudo
+
+        label(for='email' class='label') Email :
+        input(type='email', id='email', name='email', required class="input")
+        if messageErrorEmail
+          span= messageErrorEmail
+
+        label(for='password' class='label') Password:
+        input(type='password', id='password', name='password', required class="input")
+        if messageErrorPassword
+          span= messageErrorPassword
+
+        label(for='confirmation' class='label') Confirmation password:
+        input(type='password', id='confirmation', name='confirmation', required class="input")
+        if messageErrorConfirmation
+          span= messageErrorConfirmation
+
+
+        button(type='submit' class='button') Submit
+
+
+          
     if messageNosuccess
+      // Afficher le message si présent
       p= messageNosuccess
-    form(action='/submit-register')
-      label(for='firstname') First name :
-      input(type='text', id='firstname', name='firstname', required)
-      if messageErrorFirstname
-       span= messageErrorFirstname
 
-      label(for='lastname') Last name:
-      input(type='text', id='lastname', name='lastname', required)
-      if messageErrorLastname
-       span= messageErrorLastname
-
-      label(for='pseudo') Pseudo:
-      input(type='text', id='pseudo', name='pseudo', required)
-      if messageErrorPseudo
-       span= messageErrorPseudo
-
-      label(for='email') Email :
-      input(type='email', id='email', name='email', required)
-      if messageErrorEmail
-       span= messageErrorEmail
-
-      label(for='password') Password:
-      input(type='password', id='password', name='password', required)
-      if messageErrorPassword
-       span= messageErrorPassword
-
-      label(for='confirmation') Confirmation password:
-      input(type='password', id='confirmation', name='confirmation', required)
-      if messageErrorConfirmation
-       span= messageErrorConfirmation
-
-      button(type='submit') Submit
-
-      p Already registered ?
-  
