@@ -12,18 +12,18 @@ html
 
             nav(class='nav_bar')
             a(href='/' class="link")  Home 
-              if isUserLoggedIn
-                  a(href='/login') Connexion - 
-                  a(href='/inscription') Inscription
-              else 
-                  a(href='/logout') Déconnexion
-            a(href='/submit')
-                img(src='https://i.kisscc0.com/20180817/bww/kisscc0-addition-plus-and-minus-signs-symbol-computer-ic-mono-vcs-add-5b7721dab47842.3761992315345341067392.png', alt='icone' class="icone")
+                if isUserLoggedIn
+                    a(href='/logout' class="link") Déconnexion
+                else 
+                    a(href='/login' class="link") Connexion 
+                    a(href='/inscription' class="link") Inscription
+                a(href='/submit')
+                    img(src='https://i.kisscc0.com/20180817/bww/kisscc0-addition-plus-and-minus-signs-symbol-computer-ic-mono-vcs-add-5b7721dab47842.3761992315345341067392.png', alt='icone' class="icone")
         block content
-           if isUserLoggedIn  
-              // Utilisez la variable définie dans la session
-              p Vous êtes connecté !
-          else
+        if isUserLoggedIn  
+            // Utilisez la variable définie dans la session
+            p Vous êtes connecté !
+        else
             p Vous n'êtes pas connecté.
         footer(class='footer')
             section(class="column_footer")
