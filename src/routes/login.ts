@@ -1,8 +1,8 @@
 import express, { Express, Request, Response, Application } from "express";
-import session from 'express-session';
+import session from "express-session";
 import { app } from "../index";
-
-
+import { UserRequestLogin } from "../models/login";
+import { UserHash } from "../controllers/UserHash";
 
 app.get("/login", (req: Request, res: Response) => {
   res.render("login", { pageTitle: "Connexion" });
@@ -10,29 +10,81 @@ app.get("/login", (req: Request, res: Response) => {
 
 export let login: string;
 export let password: string;
-
+export let keyPassword: string;
+export let loginIsValid: boolean;
+export let loginIsAdmin: boolean;
 
 app.get("/submit-login", async (req: Request, res: Response) => {
   // Récupération des données du formulaire à partir de la requête
   login = req.query.login as string;
   password = req.query.password as string;
+  // class control
+  const controlform: boolean = true;
 
-  const loginIsValid: boolean = false;
-  const loginIsAdmin: boolean = false;
+  if (controlform) {
+    loginIsValid = false;
+    loginIsAdmin = false;
 
-  // Classe controle Variable
+    let userRequestLogin = new UserRequestLogin(login);
 
-  // Si controle ok :
-  // Classe controle login et password
+    userRequestLogin.logRequest();
 
-  if (loginIsValid) {
-    req.session.loginIsValid = true;
-    if (loginIsAdmin) {
-      req.session.loginIsAdmin = true;
-    }
+    userRequestLogin
+      .getIsLoginExist()
+      .then((loginIsValid) => {
+        const result = loginIsValid || false;
+        console.log("1 : " + result);
+
+        if (loginIsValid) {
+          // Classe controle Variable
+
+          userRequestLogin
+            .getKeyPassword()
+            .then((keyPassword) => {
+              // Utiliser keyPassword ici
+              console.log(keyPassword);
+
+              const passwordExist: boolean = UserHash.verifyPassword(
+                password,
+                keyPassword
+              );
+              // Si controle ok :
+              // Classe controle login et password
+              if (passwordExist) {
+                req.session.loginIsValid = true;
+                const isUserLoggedIn = req.session.loginIsValid || false;
+
+                res.render("home", {
+                  pageTitle: "Home",
+                  isUserLoggedIn: isUserLoggedIn,
+                });
+                if (loginIsAdmin) {
+                  req.session.loginIsAdmin = true;
+                }
+              } else {
+                res.render("login", {
+                  pageTitle: "Connexion",
+                  messagevoid: "mot de passe n'existe pas",
+                });
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        } else {
+          res.render("login", {
+            pageTitle: "Connexion",
+            messagevoid: "le login n'existe pas",
+          });
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  } else {
+    res.render("login", {
+      pageTitle: "Connexion",
+      messagevoid: "le login et/ou le mot de passe ne repondent aux critères",
+    });
   }
-  const isUserLoggedIn = req.session.loginIsValid || false;
-
-  res.render('home', { pageTitle: 'Home', isUserLoggedIn: isUserLoggedIn });
-
 });
