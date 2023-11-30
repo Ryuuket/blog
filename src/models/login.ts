@@ -1,6 +1,6 @@
 import client from "../database";
 
-export class UserRequestLogin{
+export class UserRequestLogin {
   private login: string;
   private keyPassword: string;
   private loginIsAdmin: boolean;
@@ -24,9 +24,9 @@ export class UserRequestLogin{
         this.keyPassword = result.rows[0].key_password;
         this.loginIsAdmin = result.rows[0].is_admin;
         this.isLoginExist = true;
-    console.log(this.isLoginExist);
-        
-      } 
+        console.log(this.isLoginExist);
+
+      }
 
     } catch (error) {
       console.error("Error inserting data:", error);
@@ -36,17 +36,17 @@ export class UserRequestLogin{
     }
   }
 
-  public async getIsLoginExist(): Promise<boolean>  {
+  public async getIsLoginExist(): Promise<boolean> {
     await this.logRequest();
     return this.isLoginExist;
   }
 
-  public async getKeyPassword(): Promise<string> { 
+  public async getKeyPassword(): Promise<string> {
     await this.logRequest();
     return this.keyPassword;
   }
 
-  public async getIsIsAdmin(): Promise<boolean>  {
+  public async getIsIsAdmin(): Promise<boolean> {
     await this.logRequest();
     return this.loginIsAdmin;
   }

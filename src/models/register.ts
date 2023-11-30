@@ -3,12 +3,33 @@ import {
   pseudo,
   lastname,
   firstname,
-  keypassword,
-  isAdmin
+  keypassword
 } from "../routes/register";
 import client from "../database";
 
+let isAdmin: boolean = false;
+
+
 export async function insertData(currentDate: Date): Promise<void> {
+
+  try {
+    const query = "SELECT * FROM users WHERE *";
+    const values = "";
+
+    const result = await client.query(query, values);
+
+    if (result.rows.length === 0) {
+      isAdmin = true;
+    }
+
+  } catch (error) {
+    console.error("Error inserting data:", error);
+    throw error; // Propagate the error to handle it in the route
+  } finally {
+    // client.end();
+  }
+
+
   try {
     const query =
       "INSERT INTO users (first_name, last_name, email, pseudo, key_password, is_admin, date_create) VALUES ($1, $2, $3, $4, $5, $6, $7)";
