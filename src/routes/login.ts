@@ -1,11 +1,7 @@
 import express, { Express, Request, Response, Application } from "express";
-import { Session } from "express-session";
+import session from 'express-session';
 import { app } from "../index";
 
-// Étendre le type Session avec votre propriété
-interface CustomSession extends Session {
-  isLogin?: boolean;
-}
 
 
 app.get("/login", (req: Request, res: Response) => {
@@ -20,6 +16,22 @@ app.get("/submit-login", async (req: Request, res: Response) => {
   login = req.query.login as string;
   password = req.query.password as string;
 
-  req.session.isLogin = false;
+  const loginIsValid: boolean = false;
+  const loginIsAdmin: boolean = false;
+
+  // Classe controle Variable
+
+  // Si controle ok :
+  // Classe controle login et password
+
+  if (loginIsValid) {
+    req.session.loginIsValid = true;
+    if (loginIsAdmin) {
+      req.session.loginIsAdmin = true;
+    }
+  }
+  const isUserLoggedIn = req.session.loginIsValid || false;
+
+  res.render('home', { pageTitle: 'Home', isUserLoggedIn: isUserLoggedIn });
 
 });
