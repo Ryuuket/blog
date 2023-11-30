@@ -12,6 +12,11 @@ html
             a(href='/login') Connexion - 
             a(href='/inscription') Inscription - 
         block content
+        if isUserLoggedIn  
+            // Utilisez la variable définie dans la session
+            p Vous êtes connecté !
+        else
+            p Vous n'êtes pas connecté.
         footer
             p Suivez Moi
 
