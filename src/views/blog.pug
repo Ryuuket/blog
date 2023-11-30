@@ -1,0 +1,20 @@
+extends layout.pug
+
+block content 
+    h1= pageTitle
+    if errors_message 
+        // Afficher erreur si l'utilisateur n'est pas administrateur.
+        createError(403)
+    else 
+        // Afficher le message si présent
+        form(action='/submit-blog')
+            label(for='title') Titre:
+            input(type='text', id='title', name='title', required)
+
+            label(for='img') Illustration:
+            input(type='text', id='img', name='img')
+
+            label(for='content') Contenu:
+            input(type='textarea', id='content', name='content', required)
+
+            button(type='submit') Submit

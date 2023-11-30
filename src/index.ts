@@ -9,6 +9,7 @@ export const app: Application = express();
 export const port = 8000;
 
 
+<<<<<<< Updated upstream
 app.use(session({
   secret: 'your-secret-key',
   resave: false,
@@ -37,3 +38,16 @@ import "./routes/home";
 import "./routes/login";
 import "./routes/logout";
 import "./routes/register";
+=======
+// Configuration of the Pug rendering engine
+app.set('view engine', 'pug');
+app.set('views', './src/views');
+app.listen(port, () => {
+  console.log('Server is Fire at http://localhost:' + port);
+});
+
+import './routes/home';
+import './routes/login';
+import './routes/register';
+import './routes/blog';
+>>>>>>> Stashed changes
