@@ -4,8 +4,7 @@ import {
   lastname,
   firstname,
   keypassword,
-  isAdmin,
-  currentDate,
+  isAdmin
 } from "../routes/register";
 import client from "../database";
 
@@ -31,3 +30,5 @@ export async function insertData(currentDate: Date): Promise<void> {
     throw error; // Propager l'erreur pour la gérer dans la route
   }
 }
+
+
