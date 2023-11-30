@@ -8,8 +8,8 @@ app.get("/login", (req: Request, res: Response) => {
   res.render("login", { pageTitle: "Connexion" });
 });
 
-
-export let password : string;
+export let login: string;
+export let password: string;
 
 
 app.get("/submit-login", async (req: Request, res: Response) => {
