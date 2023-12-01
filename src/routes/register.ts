@@ -1,6 +1,6 @@
 import express, { Express, Request, Response, Application } from "express";
 import { app } from "../index";
-import { insertData } from "../models/register";
+import { insertUser } from "../models/register";
 import { ControllerUser } from "../controllers/ControllerUsers";
 import { UserHash } from "../controllers/UserHash";
 
@@ -42,7 +42,7 @@ app.get("/submit-register", async (req: Request, res: Response) => {
     keypassword = UserHash.hashPassword(password);
 
     try {
-      await insertData(currentDate);
+      await insertUser(currentDate);
       res.render("register", {
         pageTitle: "Inscription Réussie",
         messageSuccess: "Inscription réussie !",

@@ -8,7 +8,7 @@ import {
 } from "../routes/register";
 import client from "../database";
 
-export async function insertData(currentDate: Date): Promise<void> {
+export async function insertUser(currentDate: Date): Promise<void> {
   try {
     const query =
       "INSERT INTO users (first_name, last_name, email, pseudo, key_password, is_admin, date_create) VALUES ($1, $2, $3, $4, $5, $6, $7)";
