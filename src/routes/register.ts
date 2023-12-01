@@ -1,6 +1,6 @@
 import express, { Express, Request, Response, Application } from "express";
 import { app } from "../index";
-import { insertData } from "../models/register";
+import { insertUser } from "../models/register";
 import { ControllerUser } from "../controllers/ControllerUsers";
 import { UserHash } from "../controllers/UserHash";
 import { UserRequestRegisterExist } from "../models/register_exist";
@@ -40,7 +40,7 @@ app.get("/submit-register", async (req: Request, res: Response) => {
   if (errors_message.validation === "true") {
     // traitement de la réponse isValid
 
-    async function checkUserExistence(email: string, pseudo: string) {
+ async function checkUserExistence(email: string, pseudo: string) {
       const userRequestExist = new UserRequestRegisterExist(email, pseudo);
 
       try {
@@ -92,20 +92,10 @@ app.get("/submit-register", async (req: Request, res: Response) => {
 
       } catch (error) {
         console.error("Error:", error);
-      }
+
     }
 
     checkUserExistence(email, pseudo);
-
-
-
-
-
-
-
-
-
-
 
   } else {
     res.status(500).render("register", {

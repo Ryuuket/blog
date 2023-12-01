@@ -1,0 +1,10 @@
+extends layout.pug
+block styles
+            link(rel='stylesheet', type='text/css', href="layout.css") 
+head
+    title= blogDetails.title
+
+block content
+    h1= blogDetails.title
+    img(src=`${blogDetails.picture}`, alt='logo' class="logo_header")
+    p= blogDetails.text_content_blog

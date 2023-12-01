@@ -64,7 +64,7 @@ app.get("/submit-login", async (req: Request, res: Response) => {
               } else {
                 res.render("login", {
                   pageTitle: "Connexion",
-                  messagevoid: "mot de passe n'existe pas",
+                  messagevoid: "Le login et/ou le mot de passe n'existe pas",
                 });
               }
             })
@@ -74,7 +74,7 @@ app.get("/submit-login", async (req: Request, res: Response) => {
         } else {
           res.render("login", {
             pageTitle: "Connexion",
-            messagevoid: "le login n'existe pas",
+            messagevoid: "Le login et/ou le mot de passe n'existe pas",
           });
         }
       })

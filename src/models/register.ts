@@ -9,8 +9,7 @@ import client from "../database";
 
 let isAdmin: boolean = false;
 
-
-export async function insertData(currentDate: Date): Promise<void> {
+export async function insertUser(currentDate: Date): Promise<void> {
   isAdmin = false;
   try {
     const query = "SELECT COUNT(*) FROM users;";
@@ -28,7 +27,6 @@ export async function insertData(currentDate: Date): Promise<void> {
   } finally {
     // client.end();
   }
-
 
   try {
     const query =

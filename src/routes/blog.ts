@@ -4,7 +4,7 @@ import { ControllerBlog } from "../controllers/ControllerBlog";
 import { insertBlog } from "../models/blog";
 
 app.get('/createblog', (req: Request, res: Response) => {
-    res.render('blog', { pageTitle: 'blog' });
+    res.render('blog', { pageTitle: 'Blog' });
 });
 
 
@@ -44,7 +44,7 @@ app.get("/submit-blog", async (req: Request, res: Response) => {
         } catch (error) {
             console.error("Error during registration:", error);
             res.status(500).render("blog", {
-              pageTitle: "blog",
+              pageTitle: "Blog",
               messageNosuccess: "Erreur lors de la création du blog",
             });
         }

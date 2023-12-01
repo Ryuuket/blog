@@ -92,12 +92,17 @@ h1{
     
 }
 
-.label{
-   
+
+
+.text{
+    display :flex;
+    flex-direction: row;
+    width: 100%;
 }
 
-.input{
-    
+.textarea{
+    height: 100px;
+
 }
 
 .button{
