@@ -12,5 +12,5 @@ block content
         label(for='password'  class='label') Password:
         input(type='password', id='password', name='password', required  class="input")
         if messagevoid
-          span= messagevoid
+          span(class='error')= messagevoid
         button(type='submit'  class='button') Submit

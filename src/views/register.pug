@@ -14,34 +14,34 @@ block content
 
       form(action='/submit-register' class="formulaire")
         label(for='firstname' class='label') First name :
-        input(type='text', id='firstname', name='firstname', required class="input")
+        input(type='text', id='firstname', name='firstname', required class="input", value= getfirstname)
         if messageErrorFirstname
-          span= messageErrorFirstname
+          span(class='error')= messageErrorFirstname
 
         label(for='lastname' class='label') Last name:
-        input(type='text', id='lastname', name='lastname', required class="input")
+        input(type='text', id='lastname', name='lastname', required class="input", value=getlastname)
         if messageErrorLastname
-          span= messageErrorLastname
+          span(class='error')= messageErrorLastname
 
         label(for='pseudo' class='label') Pseudo:
-        input(type='text', id='pseudo', name='pseudo', required class="input")
+        input(type='text', id='pseudo', name='pseudo', required class="input", value= getpseudo )
         if messageErrorPseudo
-          span= messageErrorPseudo
+          span(class='error')= messageErrorPseudo
 
         label(for='email' class='label') Email :
-        input(type='email', id='email', name='email', required class="input")
+        input(type='email', id='email', name='email', required class="input", value= getemail )
         if messageErrorEmail
-          span= messageErrorEmail
+          span(class='error')= messageErrorEmail
 
         label(for='password' class='label') Password:
-        input(type='password', id='password', name='password', required class="input")
+        input(type='password', id='password', name='password', required class="input", value= getpassword )
         if messageErrorPassword
-          span= messageErrorPassword
+          span(class='error')= messageErrorPassword
 
         label(for='confirmation' class='label') Confirmation password:
-        input(type='password', id='confirmation', name='confirmation', required class="input")
+        input(type='password', id='confirmation', name='confirmation', required class="input", value= getconfirmation )
         if messageErrorConfirmation
-          span= messageErrorConfirmation
+          span(class='error')= messageErrorConfirmation
 
 
         button(type='submit' class='button') Submit
@@ -50,5 +50,5 @@ block content
           
     if messageNosuccess
       // Afficher le message si présent
-      p= messageNosuccess
+      p(class='error')= messageNosuccess
 
