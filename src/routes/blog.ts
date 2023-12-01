@@ -2,6 +2,8 @@ import express, { Express, Request, Response, Application } from "express";
 import { app } from "../index";
 import { ControllerBlog } from "../controllers/ControllerBlog";
 import { insertBlog } from "../models/blog";
+import client from "../database";
+
 
 app.get('/createblog', (req: Request, res: Response) => {
     res.render('blog', { pageTitle: 'Blog' });
@@ -53,6 +55,20 @@ app.get("/submit-blog", async (req: Request, res: Response) => {
 
 
 });
+
+app.get('/blogs', async (req, res) => {
+    try {
+      const result = await client.query('SELECT title FROM blogs');
+  
+      const blogs = result.rows.map((row: any) => row.title);
+      console.log(blogs)
+  
+      res.render('blogs', { blogs });
+    } catch (error) {
+      console.error('Erreur lors de la récupération des blogs :', error);
+      res.status(500).send('Erreur interne du serveur');
+    }
+  });
 
 
 
