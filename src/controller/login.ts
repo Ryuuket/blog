@@ -1,6 +1,8 @@
 import express, { Request, Response } from 'express';
-import { nameRegex, passwordRegex } from "../controllers/ControllerUsers";
 import { checkcredentials } from '../services/regex';
+const app = express();
+app.use(express());
+app.post('/login', async (req: Request, res: Response) => {
 try { 
 	const { username, password } = req.body;
 	const userIsValid = checkCredentials(username, password);
