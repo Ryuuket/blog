@@ -50,4 +50,18 @@ export class ControllerUser {
     }
     return errors_message;
   }
+  public static validateLoginInputs(): { [key: string]: string} {
+	  if (!ControllerUser.pseudoRegex.test(login) || !ControllerUser.emailRegex.test(login)) {
+		  errors_message.login = "the must contain letters numbers or_and have a length between 3 and 20 characters or must be an email.";
+	  }
+	  is (!ControllerUser.passwordRegex.test(password)) {
+		  errors_message.password = "the password mus contain at least 8 characters, 1 uppercase, 1 lowercase, and one special character.";
+	  }
+	  if (Object.keys(errors_message).length > 0) { 
+		  errors_message.validation = "false";
+	  } else {
+		  errors_message.validation = "true";
+	  }
+	  return errors_message;
+  }
 }
