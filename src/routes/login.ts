@@ -32,8 +32,6 @@ app.get("/submit-login", async (req: Request, res: Response) => {
     userRequestLogin
       .getIsLoginExist()
       .then((loginIsValid) => {
-        const result = loginIsValid || false;
-        console.log("1 : " + result);
 
         if (loginIsValid) {
           // Classe controle Variable
@@ -54,13 +52,23 @@ app.get("/submit-login", async (req: Request, res: Response) => {
                 req.session.loginIsValid = true;
                 const isUserLoggedIn = req.session.loginIsValid || false;
 
-                res.render("home", {
-                  pageTitle: "Home",
-                  isUserLoggedIn: isUserLoggedIn,
-                });
-                if (loginIsAdmin) {
-                  req.session.loginIsAdmin = true;
-                }
+
+
+
+                userRequestLogin
+                  .getIsIsAdmin()
+                  .then((isAdmin) => {
+                    req.session.loginIsAdmin = isAdmin;
+                    // res.render("home", {
+                    //   pageTitle: "Home",
+                    //   isUserLoggedIn: isUserLoggedIn,
+                    // });
+                    res.redirect("/");
+                  });
+
+
+
+
               } else {
                 res.render("login", {
                   pageTitle: "Connexion",

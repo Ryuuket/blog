@@ -7,7 +7,7 @@ block content
     h1= pageTitle
     if messageSuccess
       // Afficher le message si présent
-      p= messageSuccess
+      p(class='success')= messageSuccess
       a(href='/') Revenir à Home <br>
       a(href='/login') Se connecter
     else

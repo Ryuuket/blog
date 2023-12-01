@@ -12,5 +12,5 @@ app.get('/logout', (req: Request, res: Response) => {
     const isUserAdmin = req.session.loginIsAdmin || false;
 
 
-    res.render('home', { pageTitle: 'Home', isUserLoggedIn: isUserLoggedIn, isUserAdmin: isUserAdmin });
+    res.redirect("/");
 });
