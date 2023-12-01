@@ -24,8 +24,6 @@ export class UserRequestLogin {
         this.keyPassword = result.rows[0].key_password;
         this.loginIsAdmin = result.rows[0].is_admin;
         this.isLoginExist = true;
-        console.log(this.isLoginExist);
-
       }
 
     } catch (error) {

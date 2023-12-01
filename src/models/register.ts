@@ -11,14 +11,14 @@ let isAdmin: boolean = false;
 
 
 export async function insertData(currentDate: Date): Promise<void> {
-
+  isAdmin = false;
   try {
-    const query = "SELECT * FROM users WHERE *";
+    const query = "SELECT COUNT(*) FROM users;";
     const values = "";
 
     const result = await client.query(query, values);
 
-    if (result.rows.length === 0) {
+    if (result.rows[0].count == 0) {
       isAdmin = true;
     }
 

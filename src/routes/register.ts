@@ -3,6 +3,7 @@ import { app } from "../index";
 import { insertData } from "../models/register";
 import { ControllerUser } from "../controllers/ControllerUsers";
 import { UserHash } from "../controllers/UserHash";
+import { UserRequestRegisterExist } from "../models/register_exist";
 
 app.get("/inscription", (req: Request, res: Response) => {
   res.render("register", { pageTitle: "Inscription" });
@@ -39,21 +40,73 @@ app.get("/submit-register", async (req: Request, res: Response) => {
   if (errors_message.validation === "true") {
     // traitement de la réponse isValid
 
-    keypassword = UserHash.hashPassword(password);
+    async function checkUserExistence(email: string, pseudo: string) {
+      const userRequestExist = new UserRequestRegisterExist(email, pseudo);
 
-    try {
-      await insertData(currentDate);
-      res.render("register", {
-        pageTitle: "Inscription Réussie",
-        messageSuccess: "Inscription réussie !",
-      });
-    } catch (error) {
-      console.error("Error during registration:", error);
-      res.status(500).render("register", {
-        pageTitle: "Inscription",
-        messageNosuccess: "Erreur lors de l'inscription",
-      });
+      try {
+        const emailIsExist = await userRequestExist.getIsEmailExist();
+        console.log("1 : " + emailIsExist);
+        if (emailIsExist) {
+          errors_message.email = "E-mail already exists";
+        }
+
+        const pseudoIsExist = await userRequestExist.getIsPseudoExist();
+        console.log("2 : " + pseudoIsExist);
+        if (pseudoIsExist) {
+          errors_message.pseudo = "Pseudo already exists";
+        }
+
+
+        if (emailIsExist || pseudoIsExist) {
+          res.status(500).render("register", {
+            pageTitle: "Inscription",
+            messageNosuccess: "Erreur lors de l'inscription !!",
+            messageErrorEmail: errors_message.email,
+            messageErrorPseudo: errors_message.pseudo,
+            getlastname: lastname,
+            getfirstname: firstname,
+            getpseudo: pseudo,
+            getemail: email,
+            getpassword: password,
+            getconfirmation: confirmation,
+
+          });
+        } else {
+          keypassword = UserHash.hashPassword(password);
+
+          try {
+            await insertData(currentDate);
+            res.render("register", {
+              pageTitle: "Inscription Réussie",
+              messageSuccess: "Inscription réussie !",
+            });
+          } catch (error) {
+            console.error("Error during registration:", error);
+            res.status(500).render("register", {
+              pageTitle: "Inscription",
+              messageNosuccess: "Erreur lors de l'inscription",
+            });
+          }
+
+        }
+
+      } catch (error) {
+        console.error("Error:", error);
+      }
     }
+
+    checkUserExistence(email, pseudo);
+
+
+
+
+
+
+
+
+
+
+
   } else {
     res.status(500).render("register", {
       pageTitle: "Inscription",
@@ -64,6 +117,12 @@ app.get("/submit-register", async (req: Request, res: Response) => {
       messageErrorPseudo: errors_message.pseudo,
       messageErrorPassword: errors_message.password,
       messageErrorConfirmation: errors_message.confirmation,
+      getlastname: lastname,
+      getfirstname: firstname,
+      getpseudo: pseudo,
+      getemail: email,
+      getpassword: password,
+      getconfirmation: confirmation,
     });
   }
 });
