@@ -40,7 +40,7 @@ app.get("/submit-register", async (req: Request, res: Response) => {
   if (errors_message.validation === "true") {
     // traitement de la réponse isValid
 
- async function checkUserExistence(email: string, pseudo: string) {
+    async function checkUserExistence(email: string, pseudo: string) {
       const userRequestExist = new UserRequestRegisterExist(email, pseudo);
 
       try {
@@ -71,11 +71,12 @@ app.get("/submit-register", async (req: Request, res: Response) => {
             getconfirmation: confirmation,
 
           });
+
         } else {
           keypassword = UserHash.hashPassword(password);
 
           try {
-            await insertData(currentDate);
+            await insertUser(currentDate);
             res.render("register", {
               pageTitle: "Inscription Réussie",
               messageSuccess: "Inscription réussie !",
@@ -93,10 +94,11 @@ app.get("/submit-register", async (req: Request, res: Response) => {
       } catch (error) {
         console.error("Error:", error);
 
+      }
+
+      checkUserExistence(email, pseudo);
+
     }
-
-    checkUserExistence(email, pseudo);
-
   } else {
     res.status(500).render("register", {
       pageTitle: "Inscription",
