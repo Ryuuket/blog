@@ -23,6 +23,7 @@ export class UserRequestLogin {
       if (result.rows.length > 0) {
         this.keyPassword = result.rows[0].key_password;
         this.loginIsAdmin = result.rows[0].is_admin;
+        console.log("login : " + this.loginIsAdmin);
         this.isLoginExist = true;
       }
 
@@ -46,6 +47,7 @@ export class UserRequestLogin {
 
   public async getIsIsAdmin(): Promise<boolean> {
     await this.logRequest();
+    console.log("LOGIN METHODE : " + this.loginIsAdmin);
     return this.loginIsAdmin;
   }
 

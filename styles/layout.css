@@ -118,3 +118,13 @@ h1{
     color: red;
     font-weight: bold;
 }
+.success {
+    color: rgb(4, 56, 4);
+    font-weight: bold;
+}
+
+.image{
+    width: 300px;
+    height: auto;
+    box-shadow: 2px 3px 5px #2f2f2f;
+}

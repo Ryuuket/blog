@@ -96,9 +96,10 @@ app.get("/submit-register", async (req: Request, res: Response) => {
 
       }
 
-      checkUserExistence(email, pseudo);
-
     }
+
+    checkUserExistence(email, pseudo);
+
   } else {
     res.status(500).render("register", {
       pageTitle: "Inscription",
