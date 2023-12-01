@@ -9,6 +9,8 @@ app.get('/logout', (req: Request, res: Response) => {
     req.session.loginIsAdmin = false;
 
     const isUserLoggedIn = req.session.loginIsValid || false;
+    const isUserAdmin = req.session.loginIsAdmin || false;
 
-    res.render('home', { pageTitle: 'Home', isUserLoggedIn: isUserLoggedIn });
+
+    res.render('home', { pageTitle: 'Home', isUserLoggedIn: isUserLoggedIn, isUserAdmin: isUserAdmin });
 });
